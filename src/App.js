@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import WeatherPicker from "./components/WeatherPicker/WeatherPicker";
+import {useUser} from "./hooks/useUser";
+import {useEffect, useState} from "react";
+import WeatherService from "./api/WeatherService";
+import './style/style.scss'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const pickedCities = useUser()
+    const [weatherSubscriptionCity, setWeatherSubscriptionCity] = useState()
+
+    useEffect(() => {
+        const GetData = async () => {
+            if (pickedCities.userCities !== null)
+                setWeatherSubscriptionCity(await WeatherService.getAllCitiesWeather(pickedCities.userCities))
+        }
+        GetData()
+    }, [])
+
+
+    return (
+        <div>
+            <WeatherPicker pickedCities={pickedCities} cityWeatherArr={weatherSubscriptionCity}/>
+        </div>
+    );
 }
 
 export default App;

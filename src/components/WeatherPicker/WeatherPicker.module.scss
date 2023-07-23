@@ -1,0 +1,15 @@
+@import "src/style/helpers";
+
+.form {
+  --width: 500px;
+  --height: 800px;
+  position: fixed;
+  margin-top: calc(50dvh - var(--height) / 2);
+  margin-left: calc(50vw - var(--width) / 2);
+  width: var(--width);
+  height: var(--height);
+  display: flex;
+  background: #8B85AF;
+  border-radius: 15px;
+  @include shadow(5px 5px 10px 2px rgba(34, 60, 80, 0.2));
+}
