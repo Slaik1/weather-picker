@@ -1,15 +1,34 @@
+@import "/src/style/helpers";
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 50px;
-  padding: 10px;
+  border-bottom: 1px solid #9b9b9b;
+  margin-bottom: 30px;
 }
 
 .tile {
-  font-size: 26px;
+  font-size: 25px;
   font-weight: 600;
   text-transform: uppercase;
-  color: #296399;
+  color: #9b9b9b;
+}
+
+.input {
+  all: unset;
+  padding: 3px;
+  border: 1px solid #9b9b9b;
+  box-sizing: border-box;
+  width: 250px;
+  height: 30px;
+  border-radius: 5px;
+  @include shadow(3px 3px 10px 2px rgba(34, 60, 80, 0.2));
+
+  &:focus {
+    @include shadow(3px 3px 10px 2px rgba(34, 60, 80, 0.2) inset);
+  }
+
 }

@@ -4,7 +4,7 @@ const Header = () => {
     return (
         <div className={cl.header}>
             <p className={cl.tile}>weather picker</p>
-            <input type="text" placeholder='Найти'/>
+            <input className={cl.input} type="text" placeholder='Добавить...'/>
         </div>
     );
 };
