@@ -14,32 +14,35 @@ const WeatherPanel = ({weatherObj, userCities, setUserCities}) => {
 
     const getWindDirection = (degrees) => {
         const worldSides = {
-            0:'N',
-            1:'N-E',
-            2:'E',
-            3:'S-E',
-            4:'S',
-            5:'S-W',
-            6:'W',
-            7:'N-W',
-            8:'N',
+            0: 'N',
+            1: 'N-E',
+            2: 'E',
+            3: 'S-E',
+            4: 'S',
+            5: 'S-W',
+            6: 'W',
+            7: 'N-W',
+            8: 'N',
         }
         return worldSides[Math.floor((degrees + 22.5) / 45) % 8]
     }
 
+    const isDay = () => {
+        return (weatherObj.sys.sunrise < weatherObj.dt) &&
+            (weatherObj.dt < weatherObj.sys.sunset)
+    }
+
     const removePanel = (cityName) => {
-        console.log(cityName)
         setUserCities((prev) => prev.filter((city) => city !== cityName))
-        console.log(userCities)
     }
 
     return (
-        <div className={`${cl.form} ${cl.day}`}>
-            <p className={cl.city} onClick={() => setUserCities((prev) => [...prev,'Anapa'])}>{weatherObj.name} </p>
+        <div className={`${cl.form} ${isDay() ? cl.day : cl.night}`}>
+            <p className={cl.city} onClick={() => setUserCities((prev) => [...prev, 'Anapa'])}>{weatherObj.name} </p>
             <div className={cl.title__wrapper}>
-                    <div className={cl.img__wrapper}>
-                        <img src={require('../../../assets/img/day/6.png')} alt=""/>
-                    </div>
+                <div className={cl.img__wrapper}>
+                    <img src={require(`../../../assets/img/weatherState/${weatherObj.weather[0].icon}.png`)} alt=""/>
+                </div>
                 <div className={cl.temperature__wrapper}>
                     <h2 className={cl.temperature}>{Math.round(weatherObj.main.temp)}°</h2>
                     <p className={cl.weather__about}>{status}</p>
@@ -65,7 +68,7 @@ const WeatherPanel = ({weatherObj, userCities, setUserCities}) => {
 
                 <div>
                     <Visibility></Visibility>
-                    <p className={cl.indicator}>{Math.round(weatherObj.visibility/100)}%</p>
+                    <p className={cl.indicator}>{Math.round(weatherObj.visibility / 100)}%</p>
                 </div>
                 <div>
                     <Pressure></Pressure>
