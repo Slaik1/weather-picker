@@ -2,22 +2,21 @@ import React, {useEffect, useState} from 'react';
 import cl from './WeatherPicker.module.scss'
 import Header from "./Header/Header";
 import WeatherPanel from "./WeatherPanel/WeatherPanel";
-import {useUser} from "../../hooks/useUser";
+import {useLocalStorage} from "../../hooks/useLocalStorage";
 import WeatherService from "../../api/WeatherService";
 
 const WeatherPicker = () => {
 
-    const pickedCities = useUser({})
+    const [userCities, setUserCities] = useLocalStorage('userCities',[])
     const [cityWeatherArr, setCityWeatherArr] = useState([])
 
     useEffect(() => {
         const GetData = async () => {
-            if (pickedCities.userCities !== null)
-                setCityWeatherArr(await WeatherService.getAllCitiesWeather(pickedCities.userCities))
+            if (userCities !== null)
+                setCityWeatherArr(await WeatherService.getAllCitiesWeather(userCities))
         }
         GetData()
     }, [])
-
 
     return (
         <div className={cl.form}>
@@ -27,7 +26,7 @@ const WeatherPicker = () => {
                     cityWeatherArr !== undefined && cityWeatherArr.length !== 0
                         ?
                         cityWeatherArr.map(((obj) =>
-                                <WeatherPanel key={obj.data.id} weatherObj={obj.data} pickedCities={pickedCities}/>
+                                <WeatherPanel key={obj.data.id} weatherObj={obj.data} userCities={userCities} setUserCities={setUserCities}/>
                         ))
                         :
                         ''
@@ -47,3 +46,5 @@ export default WeatherPicker;
 //     console.log(pickedCities)
 //     console.log(cityWeatherArr)
 // }
+
+// onClick={() => setUserCities((prev) => [...prev,'Moscow'])}

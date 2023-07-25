@@ -8,7 +8,7 @@ import {ReactComponent as Visibility} from "../../../assets/svg/visibility.svg";
 import {ReactComponent as Pressure} from "../../../assets/svg/pressure.svg";
 import {ReactComponent as Remove} from "../../../assets/svg/remove.svg"
 
-const WeatherPanel = ({weatherObj, pickedCities}) => {
+const WeatherPanel = ({weatherObj, userCities, setUserCities}) => {
     console.log(weatherObj)
     const status = weatherObj.weather[0].description
 
@@ -29,13 +29,13 @@ const WeatherPanel = ({weatherObj, pickedCities}) => {
 
     const removePanel = (cityName) => {
         console.log(cityName)
-        pickedCities.setUserCities((prev) => prev.filter((city) => city !== cityName))
-        console.log(pickedCities.userCities)
+        setUserCities((prev) => prev.filter((city) => city !== cityName))
+        console.log(userCities)
     }
 
     return (
         <div className={`${cl.form} ${cl.day}`}>
-            <p className={cl.city} onClick={() =>pickedCities.setUserCities((prev) => [...prev,'Anapa'])}>{weatherObj.name} </p>
+            <p className={cl.city} onClick={() => setUserCities((prev) => [...prev,'Anapa'])}>{weatherObj.name} </p>
             <div className={cl.title__wrapper}>
                     <div className={cl.img__wrapper}>
                         <img src={require('../../../assets/img/day/6.png')} alt=""/>
