@@ -20,13 +20,13 @@ const WeatherPicker = () => {
 
     return (
         <div className={cl.form}>
-            <Header userCities={userCities} setUserCities={setUserCities}/>
+            <Header userCities={userCities} setUserCities={setUserCities} setCityWeatherArr={setCityWeatherArr}/>
             <div className={cl.weatherWrapper}>
                 {
                     cityWeatherArr !== undefined && cityWeatherArr.length !== 0
                         ?
                         cityWeatherArr.map(((obj) =>
-                                <WeatherPanel key={obj.data.id} weatherObj={obj.data} userCities={userCities} setUserCities={setUserCities}/>
+                                <WeatherPanel key={obj.data.id} weatherObj={obj.data} setUserCities={setUserCities} setCityWeatherArr={setCityWeatherArr} cityWeatherArr={cityWeatherArr}/>
                         ))
                         :
                         ''

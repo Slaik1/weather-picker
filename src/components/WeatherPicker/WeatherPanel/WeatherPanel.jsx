@@ -8,8 +8,7 @@ import {ReactComponent as Visibility} from "../../../assets/svg/visibility.svg";
 import {ReactComponent as Pressure} from "../../../assets/svg/pressure.svg";
 import {ReactComponent as Remove} from "../../../assets/svg/remove.svg"
 
-const WeatherPanel = ({weatherObj, userCities, setUserCities}) => {
-    console.log(weatherObj)
+const WeatherPanel = ({weatherObj, setUserCities, setCityWeatherArr, cityWeatherArr}) => {
     const status = weatherObj.weather[0].description
 
     const getWindDirection = (degrees) => {
@@ -32,9 +31,11 @@ const WeatherPanel = ({weatherObj, userCities, setUserCities}) => {
             (weatherObj.dt < weatherObj.sys.sunset)
     }
 
-    const removePanel = (cityName) => {
-        setUserCities((prev) => prev.filter((city) => city !== cityName))
+    const removePanel = (cityId) => {
+        setUserCities((prev) => prev.filter((city) => city !== cityId))
+        setCityWeatherArr((prev) => prev.filter(obj => obj.data.id !== cityId))
     }
+
 
     return (
         <div className={`${cl.form} ${isDay() ? cl.day : cl.night}`}>
@@ -75,7 +76,7 @@ const WeatherPanel = ({weatherObj, userCities, setUserCities}) => {
                     <p className={cl.indicator}>{weatherObj.main.pressure} Pa</p>
                 </div>
             </div>
-            <div className={cl.remove} onClick={() => removePanel(weatherObj.name)}>
+            <div className={cl.remove} onClick={() => removePanel(weatherObj.id)}>
                 <Remove/>
             </div>
         </div>

@@ -11,9 +11,6 @@
 # production
 /build
 
-# external files
-/src/cache
-
 # misc
 .DS_Store
 .env.local

@@ -5,7 +5,7 @@ import useOutsideClick from "../../../hooks/useOutsideClick";
 import {compareByNameSimilarity} from "../../../utils/sort";
 import {useDebounce} from "../../../hooks/useDebounce";
 
-const Header = ({userCities, setUserCities}) => {
+const Header = ({userCities, setUserCities, setCityWeatherArr}) => {
 
     const [panelRef, isPanelActive, setIsPanelActive] = useOutsideClick(false)
     const [citiesObj, setCitiesObj] = useState({})
@@ -35,7 +35,7 @@ const Header = ({userCities, setUserCities}) => {
             {
                 isPanelActive &&
                 <DropPanel style={{position: 'absolute', top: 55, right: 0, width: '270px'}}
-                           limit={5} sortedObj={citiesSortedObj}/>
+                           limit={5} sortedObj={citiesSortedObj} setUserCities={setUserCities} setCityWeatherArr={setCityWeatherArr} userCities={userCities}/>
             }
         </div>
     );
