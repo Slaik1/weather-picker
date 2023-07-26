@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default class WeatherService {
 
-
     static async getCityWeather(cityName) {
         return await axios.get("https://api.openweathermap.org/data/2.5/weather", {
             params: {

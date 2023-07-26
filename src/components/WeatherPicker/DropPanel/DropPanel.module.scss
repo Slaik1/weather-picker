@@ -1,0 +1,45 @@
+@import "/src/style/helpers";
+
+.form {
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 10px;
+  animation: 0.4s show;
+  z-index: 3;
+  @include shadow(3px 3px 10px 2px rgba(34, 60, 80, 0.2));
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  min-height: 40px;
+  padding: 5px;
+  border-bottom: 1px solid #e1e1e1;
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: #626161;
+  &:hover {
+    background: #e1e1e1;
+  }
+
+  &:first-child {
+    border-top: 1px solid #e1e1e1;
+  }
+}
+
+.text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #626161;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

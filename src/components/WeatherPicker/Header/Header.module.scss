@@ -1,6 +1,7 @@
 @import "/src/style/helpers";
 
 .header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,10 +20,11 @@
 
 .input {
   all: unset;
+  transition: box-shadow 1s;
   padding: 3px;
   border: 1px solid #9b9b9b;
   box-sizing: border-box;
-  width: 250px;
+  width: 270px;
   height: 30px;
   border-radius: 5px;
   @include shadow(3px 3px 10px 2px rgba(34, 60, 80, 0.2));
@@ -30,5 +32,4 @@
   &:focus {
     @include shadow(3px 3px 10px 2px rgba(34, 60, 80, 0.2) inset);
   }
-
 }

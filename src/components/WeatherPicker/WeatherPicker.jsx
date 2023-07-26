@@ -19,8 +19,8 @@ const WeatherPicker = () => {
     }, [])
 
     return (
-        <div className={cl.form} onClick={() => setUserCities((prev) => [...prev,'Paris'])}>
-            <Header/>
+        <div className={cl.form}>
+            <Header userCities={userCities} setUserCities={setUserCities}/>
             <div className={cl.weatherWrapper}>
                 {
                     cityWeatherArr !== undefined && cityWeatherArr.length !== 0
