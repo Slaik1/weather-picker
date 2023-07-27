@@ -8,34 +8,37 @@ import {useDebounce} from "../../../hooks/useDebounce";
 const Header = ({userCities, setUserCities, setCityWeatherArr}) => {
 
     const [panelRef, isPanelActive, setIsPanelActive] = useOutsideClick(false)
-    const [citiesObj, setCitiesObj] = useState({})
-    const [citiesSortedObj, setCitiesSortedObj] = useState({})
+    const [citiesArr, setCitiesArr] = useState([])
+    const [citiesSortedArr, setCitiesSortedArr] = useState([])
     const [inputValue, setInputValue] = useState('')
 
     useEffect(() => {
-        setCitiesObj(require('../../../cache/city.list.json'))
+        setCitiesArr(require('../../../cache/city.list.json'))
     }, [])
 
     const sortByName = () => {
         if (inputValue && isPanelActive) {
-            setCitiesSortedObj(citiesObj.sort((a, b) => compareByNameSimilarity(a, b, inputValue, 'name')))
+            setCitiesSortedArr(citiesArr.slice(0).sort((a, b) => compareByNameSimilarity(a, b, inputValue, 'name')))
             return
         }
-        setCitiesSortedObj({})
+        setCitiesSortedArr([])
     }
 
-    useDebounce(sortByName, 250, inputValue)
+    useDebounce(sortByName, 1000, inputValue)
 
     return (
         <div className={cl.header}>
             <p className={cl.tile}>weather picker</p>
-            <input className={cl.input} type="text" placeholder='Добавить...' value={inputValue} ref={panelRef}
+            <input className={cl.input} type="text" placeholder='Add...' value={inputValue} ref={panelRef}
                    onClick={() => setIsPanelActive(true)}
-                   onChange={e => {setInputValue(e.target.value)}}/>
+                   onChange={e => {
+                       setInputValue(e.target.value)
+                   }}/>
             {
                 isPanelActive &&
                 <DropPanel style={{position: 'absolute', top: 55, right: 0, width: '270px'}}
-                           limit={5} sortedObj={citiesSortedObj} setUserCities={setUserCities} setCityWeatherArr={setCityWeatherArr} userCities={userCities}/>
+                           limit={10} sortedArr={citiesSortedArr} setUserCities={setUserCities}
+                           setCityWeatherArr={setCityWeatherArr} userCities={userCities}/>
             }
         </div>
     );

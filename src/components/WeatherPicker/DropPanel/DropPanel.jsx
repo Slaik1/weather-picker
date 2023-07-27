@@ -1,7 +1,7 @@
 import React from 'react';
 import cl from './DropPanel.module.scss'
 import WeatherService from "../../../api/WeatherService";
-const DropPanel = ({limit, sortedObj, setUserCities, setCityWeatherArr, userCities, ...props}) => {
+const DropPanel = ({limit, sortedArr, setUserCities, setCityWeatherArr, userCities, ...props}) => {
 
     const addCity = async (cityId) => {
         if (userCities.includes(cityId))
@@ -14,10 +14,10 @@ const DropPanel = ({limit, sortedObj, setUserCities, setCityWeatherArr, userCiti
     return (
         <div className={cl.form} {...props} >
             {
-                Object.keys(sortedObj).slice(0, limit).map((item) =>
-                    <div key={sortedObj[item].id} className={cl.item} onClick={() => addCity(sortedObj[item].id)}>
-                        <p className={cl.text}>{sortedObj[item].name}</p>
-                        <p>{sortedObj[item].country}</p>
+                Object.keys(sortedArr).slice(0, limit).map((item) =>
+                    <div key={sortedArr[item].id} className={cl.item} onClick={() => addCity(sortedArr[item].id)}>
+                        <p className={cl.text}>{sortedArr[item].name}</p>
+                        <p>{sortedArr[item].country}</p>
                     </div>
                 )
             }

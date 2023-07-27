@@ -37,14 +37,3 @@ const WeatherPicker = () => {
 };
 
 export default WeatherPicker;
-
-// const change = async () => {
-//     pickedCities.setUserCities((prev) => [...prev,'Anapa'])
-//     console.log('asd')
-//     // const a= await WeatherService.getCityWeather('Moscow')
-//     // console.log(a)
-//     console.log(pickedCities)
-//     console.log(cityWeatherArr)
-// }
-
-// onClick={() => setUserCities((prev) => [...prev,'Moscow'])}
