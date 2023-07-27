@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import cl from './Header.module.scss'
 import DropPanel from "../DropPanel/DropPanel";
 import useOutsideClick from "../../../hooks/useOutsideClick";
@@ -29,7 +29,8 @@ const Header = ({userCities, setUserCities, setCityWeatherArr}) => {
     return (
         <div className={cl.header}>
             <p className={cl.tile}>weather picker</p>
-            <input className={cl.input} type="text" placeholder='Add...' value={inputValue} ref={panelRef}
+            <input className={cl.input} type="text" placeholder='Add...'
+                   value={inputValue} ref={panelRef}
                    onClick={() => setIsPanelActive(true)}
                    onChange={e => {
                        setInputValue(e.target.value)

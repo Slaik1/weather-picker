@@ -9,11 +9,3 @@ export const useLocalStorage = (storageKey, fallbackState) => {
 
     return [value, setValue]
 }
-
-// if (userCities !== null && userCities.length != 0) {
-//     sample = require('../cache/city.list.json')
-//     const isLastValid =  sample.some((el => el.name === userCities.at(-1)))
-//     if (!isLastValid) {
-//         setUserCities(() => [...userCities].pop())
-//     }
-// }

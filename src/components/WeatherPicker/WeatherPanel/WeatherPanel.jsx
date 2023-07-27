@@ -36,10 +36,9 @@ const WeatherPanel = ({weatherObj, setUserCities, setCityWeatherArr, cityWeather
         setCityWeatherArr((prev) => prev.filter(obj => obj.data.id !== cityId))
     }
 
-
     return (
         <div className={`${cl.form} ${isDay() ? cl.day : cl.night}`}>
-            <p className={cl.city} onClick={() => setUserCities((prev) => [...prev, 'Anapa'])}>{weatherObj.name} </p>
+            <p className={cl.city}>{weatherObj.name} </p>
             <div className={cl.title__wrapper}>
                 <div className={cl.img__wrapper}>
                     <img src={require(`../../../assets/img/weatherState/${weatherObj.weather[0].icon}.png`)} alt=""/>

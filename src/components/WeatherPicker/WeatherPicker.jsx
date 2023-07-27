@@ -7,7 +7,7 @@ import WeatherService from "../../api/WeatherService";
 
 const WeatherPicker = () => {
 
-    const [userCities, setUserCities] = useLocalStorage('userCities',[])
+    const [userCities, setUserCities] = useLocalStorage('userCities', [])
     const [cityWeatherArr, setCityWeatherArr] = useState([])
 
     useEffect(() => {
@@ -26,7 +26,8 @@ const WeatherPicker = () => {
                     cityWeatherArr !== undefined && cityWeatherArr.length !== 0
                         ?
                         cityWeatherArr.map(((obj) =>
-                                <WeatherPanel key={obj.data.id} weatherObj={obj.data} setUserCities={setUserCities} setCityWeatherArr={setCityWeatherArr} cityWeatherArr={cityWeatherArr}/>
+                                <WeatherPanel key={obj.data.id} weatherObj={obj.data} setUserCities={setUserCities}
+                                              setCityWeatherArr={setCityWeatherArr} cityWeatherArr={cityWeatherArr}/>
                         ))
                         :
                         ''
