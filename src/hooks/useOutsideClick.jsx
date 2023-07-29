@@ -15,9 +15,11 @@ const useOutsideClick = (initialValue) => {
         return () => {
             document.removeEventListener("click", handleClick);
         };
-    });
+    }, []); 
 
     return [ ref, isActive, setIsActive ];
 };
 
 export default useOutsideClick;
+
+

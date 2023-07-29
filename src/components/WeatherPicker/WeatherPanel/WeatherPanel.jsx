@@ -1,5 +1,6 @@
 import React from 'react'
 import cl from './WeatherPanel.module.scss'
+// Задание: Сделать компонет svg принимающий в себя пропс src(название) без полного пути и расширения
 import {ReactComponent as Wind} from "../../../assets/svg/wind.svg"
 import {ReactComponent as Clouds} from "../../../assets/svg/cloud.svg"
 import {ReactComponent as WaterDrop} from "../../../assets/svg/water-drop.svg";
@@ -7,47 +8,57 @@ import {ReactComponent as Equals} from "../../../assets/svg/equals.svg";
 import {ReactComponent as Visibility} from "../../../assets/svg/visibility.svg";
 import {ReactComponent as Pressure} from "../../../assets/svg/pressure.svg";
 import {ReactComponent as Remove} from "../../../assets/svg/remove.svg"
+import { WORLD_SIDES } from '../../../constants/constants';
 
 const WeatherPanel = ({weatherObj, setUserCities, setCityWeatherArr, cityWeatherArr}) => {
     const status = weatherObj.weather[0].description
 
     const getWindDirection = (degrees) => {
-        const worldSides = {
-            0: 'N',
-            1: 'N-E',
-            2: 'E',
-            3: 'S-E',
-            4: 'S',
-            5: 'S-W',
-            6: 'W',
-            7: 'N-W',
-            8: 'N',
-        }
-        return worldSides[Math.floor((degrees + 22.5) / 45) % 8]
+        const index = Math.floor((degrees + 22.5) / 45) % 8
+        
+        return WORLD_SIDES[index]
     }
 
     const isDay = () => {
-        return (weatherObj.sys.sunrise < weatherObj.dt) &&
-            (weatherObj.dt < weatherObj.sys.sunset)
+        const isAfterSunrise = weatherObj.sys.sunrise < weatherObj.dt
+        const isBeforeSunset = weatherObj.dt < weatherObj.sys.sunset
+
+        const isDay = isAfterSunrise && isBeforeSunset
+
+        return isDay
     }
 
     const removePanel = (cityId) => {
-        setUserCities((prev) => prev.filter((city) => city !== cityId))
+        const filtredCityes = cityWeatherArr.filter((city) => city !== cityId)
+
+        setUserCities(filtredCityes)
+
+
         setCityWeatherArr((prev) => prev.filter(obj => obj.data.id !== cityId))
     }
 
+    const dayState = isDay() ? cl.day : cl.night
+
+    const classes = [
+        cl.form,
+        dayState
+    ]
+
+    const imageSrc = require(`../../../assets/img/weatherState/${weatherObj.weather[0].icon}.png`)
+
     return (
-        <div className={`${cl.form} ${isDay() ? cl.day : cl.night}`}>
+        <div className={classes.join(' ')} title='Dick'>
             <p className={cl.city}>{weatherObj.name} </p>
             <div className={cl.title__wrapper}>
                 <div className={cl.img__wrapper}>
-                    <img src={require(`../../../assets/img/weatherState/${weatherObj.weather[0].icon}.png`)} alt=""/>
+                    <img src={imageSrc} alt=""/>
                 </div>
                 <div className={cl.temperature__wrapper}>
                     <h2 className={cl.temperature}>{Math.round(weatherObj.main.temp)}°</h2>
                     <p className={cl.weather__about}>{status}</p>
                 </div>
             </div>
+            {/* Я бы вынес статистику в отдельный компонент */}
             <div className={cl.stat}>
                 <div>
                     <Equals></Equals>
