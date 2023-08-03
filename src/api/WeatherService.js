@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiAppId = process.env.REACT_APP_APPID
+const apiAppId = process.env.REACT_APP_OPENWEATHER_KEY
 
 export default class WeatherService {
 

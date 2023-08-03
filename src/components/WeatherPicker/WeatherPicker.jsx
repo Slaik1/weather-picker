@@ -32,8 +32,7 @@ const WeatherPicker = () => {
                                     key={obj.data.id} 
                                     weatherObj={obj.data} 
                                     setUserCities={setUserCities}
-                                    setCityWeatherArr={setCityWeatherArr} 
-                                    cityWeatherArr={cityWeatherArr}
+                                    setCityWeatherArr={setCityWeatherArr}
                                 />
                         ))
                         :
