@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import cl from './WeatherPicker.module.scss'
 import Header from "./Header/Header";
 import WeatherPanel from "./WeatherPanel/WeatherPanel";
@@ -6,15 +6,17 @@ import {useLocalStorage} from "../../hooks/useLocalStorage";
 import WeatherService from "../../api/WeatherService";
 
 const WeatherPicker = () => {
-
     const [userCities, setUserCities] = useLocalStorage('userCities', [])
     const [cityWeatherArr, setCityWeatherArr] = useState([])
 
+    const GetData = async () => {
+        if (!userCities) return
+        const res = await WeatherService.getAllCitiesWeather(userCities)
+        
+        setCityWeatherArr(res)
+    }
+
     useEffect(() => {
-        const GetData = async () => {
-            if (userCities !== null)
-                setCityWeatherArr(await WeatherService.getAllCitiesWeather(userCities))
-        }
         GetData()
     }, [])
 
@@ -23,14 +25,18 @@ const WeatherPicker = () => {
             <Header userCities={userCities} setUserCities={setUserCities} setCityWeatherArr={setCityWeatherArr}/>
             <div className={cl.weatherWrapper}>
                 {
-                    cityWeatherArr !== undefined && cityWeatherArr.length !== 0
+                    cityWeatherArr && cityWeatherArr.length
                         ?
                         cityWeatherArr.map(((obj) =>
-                                <WeatherPanel key={obj.data.id} weatherObj={obj.data} setUserCities={setUserCities}
-                                              setCityWeatherArr={setCityWeatherArr} cityWeatherArr={cityWeatherArr}/>
+                                <WeatherPanel 
+                                    key={obj.data.id} 
+                                    weatherObj={obj.data} 
+                                    setUserCities={setUserCities}
+                                    setCityWeatherArr={setCityWeatherArr}
+                                />
                         ))
                         :
-                        ''
+                        null
                 }
             </div>
         </div>

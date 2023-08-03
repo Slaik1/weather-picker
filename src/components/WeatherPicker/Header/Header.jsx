@@ -6,7 +6,6 @@ import {compareByNameSimilarity} from "../../../utils/sort";
 import {useDebounce} from "../../../hooks/useDebounce";
 
 const Header = ({userCities, setUserCities, setCityWeatherArr}) => {
-
     const [panelRef, isPanelActive, setIsPanelActive] = useOutsideClick(false)
     const [citiesArr, setCitiesArr] = useState([])
     const [citiesSortedArr, setCitiesSortedArr] = useState([])
@@ -37,9 +36,14 @@ const Header = ({userCities, setUserCities, setCityWeatherArr}) => {
                    }}/>
             {
                 isPanelActive &&
-                <DropPanel style={{position: 'absolute', top: 55, right: 0, width: '270px'}}
-                           limit={10} sortedArr={citiesSortedArr} setUserCities={setUserCities}
-                           setCityWeatherArr={setCityWeatherArr} userCities={userCities}/>
+                <DropPanel 
+                    style={{position: 'absolute', top: 55, right: 0, width: '270px'}}
+                    limit={10} 
+                    sortedArr={citiesSortedArr} 
+                    setUserCities={setUserCities}
+                    setCityWeatherArr={setCityWeatherArr} 
+                    userCities={userCities}
+                />
             }
         </div>
     );
